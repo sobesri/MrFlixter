@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mrflixter;
+
+import static java.nio.file.StandardOpenOption.*;
+import java.nio.file.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -44,8 +49,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        LblMessage.setText("jLabel2");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -78,6 +81,8 @@ public class Login extends javax.swing.JFrame {
                 .addGap(38, 38, 38))
         );
 
+        LblMessage.getAccessibleContext().setAccessibleName("");
+
         jLabel1.setText("Login");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -98,7 +103,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
         );
@@ -107,10 +112,22 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
-        if("".equals(TxtUserName.getText())) {
+
+        String username = TxtUserName.getText();
+        String password = TxtPassword.getText();
+
+        if ("".equals(username)) {
             LblMessage.setText("Enter UserName");
+        } else if ("".equals(password)) {
+            LblMessage.setText("Enter Password");
         } else {
-            LblMessage.setText(TxtUserName.getText() + " is logged in");
+            User u = null;
+            u = logUserIn(username, password);
+            if (u != null) {
+                LblMessage.setText(u.getFullName() + " is logged in");
+            } else {
+                LblMessage.setText("Login Error");
+            }
         }
     }//GEN-LAST:event_BtnLoginActionPerformed
 
@@ -147,6 +164,22 @@ public class Login extends javax.swing.JFrame {
                 new Login().setVisible(true);
             }
         });
+    }
+
+    public User logUserIn(String username, String password) {
+        User u = null;
+        ArrayList<User> userList = new ArrayList<User>(
+                Arrays.asList(
+                        new User("admin", "admin", "admin@mail.com", "Admininistrator"),
+                        new User("user1", "1234", "user1@mail.com", "Firstname Lastname")
+                )
+        );
+        u = userList.stream()
+                .filter(user -> username.equals(user.getUsername()) && password.equals(user.getPassword()))
+                .findAny()
+                .orElse(null);
+
+        return u;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
