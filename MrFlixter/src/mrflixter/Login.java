@@ -7,6 +7,9 @@ package mrflixter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -33,8 +36,8 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         BtnLogin = new javax.swing.JButton();
         TxtUserName = new javax.swing.JTextField();
-        TxtPassword = new javax.swing.JTextField();
         LblMessage = new javax.swing.JLabel();
+        TxtPassword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,11 +73,10 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(BtnLogin)
                         .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(LblMessage)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(TxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TxtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(TxtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                            .addComponent(TxtPassword))
                         .addGap(84, 84, 84))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -82,9 +84,9 @@ public class Login extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(TxtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(70, 70, 70)
                 .addComponent(TxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LblMessage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(BtnLogin)
@@ -122,7 +124,7 @@ public class Login extends javax.swing.JFrame {
     private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
 
         String username = TxtUserName.getText();
-        String password = TxtPassword.getText();
+        String password = TxtPassword.getPassword().toString();
 
         if ("".equals(username) || "".equals(password)) {
             LblMessage.setText("Enter Username and Password");
@@ -130,7 +132,7 @@ public class Login extends javax.swing.JFrame {
             User u = null;
             u = logUserIn(username, password);
             if (u != null) {
-                MainMenu m = new MainMenu();
+                MainMenu m = new MainMenu(u);
                 m.setVisible(true);
                 this.setVisible(false);
                 this.dispose();
@@ -141,31 +143,31 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BtnLoginActionPerformed
 
-    private void TxtUserNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtUserNameKeyTyped
-        // TODO add your handling code here:
-        
-        String username = TxtUserName.getText();
-        String password = TxtPassword.getText();
-        
-        if("".equals(username) || "".equals(password)) {
-            BtnLogin.setEnabled(false);
-        } else {
-            BtnLogin.setEnabled(true);
-        }
-    }//GEN-LAST:event_TxtUserNameKeyTyped
-
     private void TxtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPasswordKeyTyped
         // TODO add your handling code here:
-        
+
         String username = TxtUserName.getText();
-        String password = TxtPassword.getText();
-        
-        if("".equals(username) || "".equals(password)) {
+        String password = new String(TxtPassword.getPassword());
+
+        if (username.isEmpty() || password.isEmpty()) {
             BtnLogin.setEnabled(false);
         } else {
             BtnLogin.setEnabled(true);
         }
     }//GEN-LAST:event_TxtPasswordKeyTyped
+
+    private void TxtUserNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtUserNameKeyTyped
+        // TODO add your handling code here:
+
+        String username = TxtUserName.getText();
+        String password = new String(TxtPassword.getPassword());
+
+        if (username.isEmpty() || password.isEmpty()) {
+            BtnLogin.setEnabled(false);
+        } else {
+            BtnLogin.setEnabled(true);
+        }                
+    }//GEN-LAST:event_TxtUserNameKeyTyped
 
     /**
      * @param args the command line arguments
@@ -221,7 +223,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnLogin;
     private javax.swing.JLabel LblMessage;
-    private javax.swing.JTextField TxtPassword;
+    private javax.swing.JPasswordField TxtPassword;
     private javax.swing.JTextField TxtUserName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

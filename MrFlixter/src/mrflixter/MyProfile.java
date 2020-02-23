@@ -59,7 +59,7 @@ public class MyProfile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMainMenuActionPerformed
-        MainMenu m = new MainMenu();
+        MainMenu m = new MainMenu(null);
         m.setVisible(true);
         this.setVisible(false);
         this.dispose();
