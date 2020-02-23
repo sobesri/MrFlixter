@@ -5,9 +5,6 @@
  */
 package mrflixter;
 
-import static java.nio.file.StandardOpenOption.*;
-import java.nio.file.*;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -124,6 +121,10 @@ public class Login extends javax.swing.JFrame {
             User u = null;
             u = logUserIn(username, password);
             if (u != null) {
+                MainMenu m = new MainMenu();
+                m.setVisible(true);
+                this.setVisible(false);
+                this.dispose();
                 LblMessage.setText(u.getFullName() + " is logged in");
             } else {
                 LblMessage.setText("Login Error");
