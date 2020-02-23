@@ -40,9 +40,22 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BtnLogin.setText("Login");
+        BtnLogin.setEnabled(false);
         BtnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnLoginActionPerformed(evt);
+            }
+        });
+
+        TxtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtUserNameKeyTyped(evt);
+            }
+        });
+
+        TxtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtPasswordKeyTyped(evt);
             }
         });
 
@@ -78,8 +91,6 @@ public class Login extends javax.swing.JFrame {
                 .addGap(38, 38, 38))
         );
 
-        LblMessage.getAccessibleContext().setAccessibleName("");
-
         jLabel1.setText("Login");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -113,10 +124,8 @@ public class Login extends javax.swing.JFrame {
         String username = TxtUserName.getText();
         String password = TxtPassword.getText();
 
-        if ("".equals(username)) {
-            LblMessage.setText("Enter UserName");
-        } else if ("".equals(password)) {
-            LblMessage.setText("Enter Password");
+        if ("".equals(username) || "".equals(password)) {
+            LblMessage.setText("Enter Username and Password");
         } else {
             User u = null;
             u = logUserIn(username, password);
@@ -131,6 +140,32 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_BtnLoginActionPerformed
+
+    private void TxtUserNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtUserNameKeyTyped
+        // TODO add your handling code here:
+        
+        String username = TxtUserName.getText();
+        String password = TxtPassword.getText();
+        
+        if("".equals(username) || "".equals(password)) {
+            BtnLogin.setEnabled(false);
+        } else {
+            BtnLogin.setEnabled(true);
+        }
+    }//GEN-LAST:event_TxtUserNameKeyTyped
+
+    private void TxtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPasswordKeyTyped
+        // TODO add your handling code here:
+        
+        String username = TxtUserName.getText();
+        String password = TxtPassword.getText();
+        
+        if("".equals(username) || "".equals(password)) {
+            BtnLogin.setEnabled(false);
+        } else {
+            BtnLogin.setEnabled(true);
+        }
+    }//GEN-LAST:event_TxtPasswordKeyTyped
 
     /**
      * @param args the command line arguments
