@@ -5,8 +5,16 @@
  */
 package mrflixter;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneLayout;
 
 /**
  *
@@ -14,10 +22,23 @@ import java.util.Arrays;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    private ArrayList<User> userList = new ArrayList<User>(
+    private final ArrayList<User> userList = new ArrayList<User>(
             Arrays.asList(
                     new User("admin", "admin", "admin@mail.com", "Admininistrator"),
                     new User("user1", "1234", "user1@mail.com", "Firstname Lastname")
+            )
+    );
+
+    private final ArrayList<Movie> movies = new ArrayList<Movie>(
+            Arrays.asList(
+                    new Movie("Comedy", "Movie 1", 3),
+                    new Movie("Comedy", "Movie 2", 6),
+                    new Movie("Romance", "Movie 3", 2),
+                    new Movie("Thriller", "Movie 4", 8),
+                    new Movie("Horror", "Movie 5", 4),
+                    new Movie("Horror", "Movie 5", 4),
+                    new Movie("Horror", "Movie 5", 4),
+                    new Movie("Horror", "Movie 6", 7)
             )
     );
 
@@ -26,6 +47,35 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu(User u) {
         initComponents();
+        if (null != u) {
+            LblWelcome.setText("Welcome " + u.getFullName());
+        }
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        add(panel, BorderLayout.CENTER);
+        panel.setSize(800, 300);
+        panel.setLocation(0, 100);
+        panel.setAutoscrolls(true);
+        panel.setPreferredSize(new Dimension(800, 300));
+
+        for (int i = 0; i < movies.size(); i++) {
+            JButton button = new JButton(movies.get(i).getTitle());
+            button.setPreferredSize(new Dimension(200, 100));
+            panel.add(button, BorderLayout.CENTER);
+            validate();
+        }
+        
+        panel.setVisible(true);
+//        JScrollPane scroll = new JScrollPane(panel,
+//                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+//                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+//        getContentPane().add(scroll, BorderLayout.CENTER);
+//        scroll.setViewportView(panel);
+//        scroll.setVisible(true);
+
+        repaint();
+
     }
 
     /**
@@ -38,8 +88,8 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         BtnLogOut = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         BtnProfile = new javax.swing.JButton();
+        LblWelcome = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,17 +100,6 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
-        );
-
         BtnProfile.setText("My Profile");
         BtnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,32 +107,31 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        LblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LblWelcome.setText("Welcome !");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BtnProfile)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnLogOut)
-                        .addGap(20, 20, 20))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67))))
+                .addContainerGap(249, Short.MAX_VALUE)
+                .addComponent(LblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(BtnProfile)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnLogOut)
+                .addGap(79, 79, 79))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnLogOut)
-                    .addComponent(BtnProfile))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                    .addComponent(BtnProfile)
+                    .addComponent(LblWelcome))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
 
         pack();
@@ -120,6 +158,6 @@ public class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnLogOut;
     private javax.swing.JButton BtnProfile;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel LblWelcome;
     // End of variables declaration//GEN-END:variables
 }
