@@ -45,12 +45,20 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
+    public MainMenu() {
+        initComponents();
+        initiateMoviesList();
+    }
+
     public MainMenu(User u) {
         initComponents();
         if (null != u) {
             LblWelcome.setText("Welcome " + u.getFullName());
         }
+        initiateMoviesList();
+    }
 
+    public void initiateMoviesList() {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         add(panel, BorderLayout.CENTER);
@@ -65,17 +73,10 @@ public class MainMenu extends javax.swing.JFrame {
             panel.add(button, BorderLayout.CENTER);
             validate();
         }
-        
+
         panel.setVisible(true);
-//        JScrollPane scroll = new JScrollPane(panel,
-//                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-//                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//        getContentPane().add(scroll, BorderLayout.CENTER);
-//        scroll.setViewportView(panel);
-//        scroll.setVisible(true);
 
         repaint();
-
     }
 
     /**

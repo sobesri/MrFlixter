@@ -30,10 +30,10 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-            
-       }
-                    Database db = new Database();
-    
+
+    }
+    Database db = new Database();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,15 +168,15 @@ public class Login extends javax.swing.JFrame {
         String password = new String(TxtPassword.getPassword());
         try {
             db.con();
-            ResultSet rs = db.getdata("SELECT * FROM user WHERE user_name='" + username 
-                + "'&& password='" + password + "'");
-            
+            ResultSet rs = db.getdata("SELECT * FROM user WHERE user_name='" + username
+                    + "'&& password='" + password + "'");
+
             if (rs.next()) {
-                System.out.println("username- "+username);
-                System.out.println("password- "+password);
+                System.out.println("username- " + username);
+                System.out.println("password- " + password);
                 this.dispose();
-        MainMenu m = new MainMenu();
-        m.setVisible(true);
+                MainMenu m = new MainMenu(); // Send Result User here as a param.
+                m.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Invalid username or password");
 
