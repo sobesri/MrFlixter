@@ -10,6 +10,7 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.sql.ResultSet;
 
 /**
  *
@@ -29,8 +30,10 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-    }
-
+            
+       }
+                    Database db = new Database();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -163,21 +166,25 @@ public class Login extends javax.swing.JFrame {
 
         String username = TxtUserName.getText();
         String password = new String(TxtPassword.getPassword());
-
-        if ("".equals(username) || "".equals(password)) {
-            LblMessage.setText("Enter Username and Password");
-        } else {
-            User u = null;
-            u = logUserIn(username, password);
-            if (u != null) {
-                MainMenu m = new MainMenu(u);
-                m.setVisible(true);
-                this.setVisible(false);
+        try {
+            db.con();
+            ResultSet rs = db.getdata("SELECT * FROM user WHERE user_name='" + username 
+                + "'&& password='" + password + "'");
+            
+            if (rs.next()) {
+                System.out.println("username- "+username);
+                System.out.println("password- "+password);
                 this.dispose();
+        MainMenu m = new MainMenu();
+        m.setVisible(true);
             } else {
-                LblMessage.setText("Login Error");
+                JOptionPane.showMessageDialog(rootPane, "Invalid username or password");
+
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }//GEN-LAST:event_BtnLoginActionPerformed
 
     private void TxtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPasswordKeyTyped
