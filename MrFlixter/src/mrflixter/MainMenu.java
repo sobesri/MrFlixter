@@ -42,6 +42,8 @@ public class MainMenu extends javax.swing.JFrame {
             )
     );
 
+    private User user;
+    
     /**
      * Creates new form MainMenu
      */
@@ -53,6 +55,7 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu(User u) {
         initComponents();
         if (null != u) {
+            user = u;
             LblWelcome.setText("Welcome " + u.getFullName());
         }
         initiateMoviesList();
@@ -146,7 +149,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnLogOutActionPerformed
 
     private void BtnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnProfileActionPerformed
-        MyProfile m = new MyProfile();
+        MyProfile m = new MyProfile(user);
         m.setVisible(true);
         this.setVisible(false);
         this.dispose();

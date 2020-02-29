@@ -11,10 +11,17 @@ package mrflixter;
  */
 public class MyProfile extends javax.swing.JFrame {
 
+    
+    private User user;
     /**
      * Creates new form MyProfile
      */
     public MyProfile() {
+        initComponents();
+    }
+    
+    public MyProfile(User u) {
+        user = u;
         initComponents();
     }
 
