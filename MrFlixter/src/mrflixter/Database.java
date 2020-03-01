@@ -24,7 +24,7 @@ public class Database {
         if (c == null) {
             Class.forName("com.mysql.jdbc.Driver");
             c = DriverManager.getConnection
-        ("jdbc:mysql://localhost:3309/genius_institute",
+        ("jdbc:mysql://localhost:3306/mrflixter",
                 "root", "1234");
         }
         return c;

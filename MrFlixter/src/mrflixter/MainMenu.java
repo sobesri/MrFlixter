@@ -9,12 +9,15 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneLayout;
+import static mrflixter.Database.con;
 
 /**
  *
@@ -22,13 +25,11 @@ import javax.swing.ScrollPaneLayout;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    private final ArrayList<User> userList = new ArrayList<User>(
-            Arrays.asList(
-                    new User("admin", "admin", "admin@mail.com", "Admininistrator"),
-                    new User("user1", "1234", "user1@mail.com", "Firstname Lastname")
-            )
-    );
-
+   // private final ArrayList<User> userList = new ArrayList<User>(
+    //               new User("admin", "admin", "admin@mail.com", "Admininistrator"),
+    //             new User("user1", "1234", "user1@mail.com", "Firstname Lastname")
+    //   )
+    //   );
     private final ArrayList<Movie> movies = new ArrayList<Movie>(
             Arrays.asList(
                     new Movie("Comedy", "Movie 1", 3),
@@ -43,7 +44,7 @@ public class MainMenu extends javax.swing.JFrame {
     );
 
     private User user;
-    
+
     /**
      * Creates new form MainMenu
      */
@@ -53,6 +54,7 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     public MainMenu(User u) {
+
         initComponents();
         if (null != u) {
             user = u;

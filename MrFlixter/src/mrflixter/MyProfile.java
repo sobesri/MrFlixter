@@ -5,6 +5,9 @@
  */
 package mrflixter;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  *
  * @author Sridaran
@@ -35,6 +38,14 @@ public class MyProfile extends javax.swing.JFrame {
     private void initComponents() {
 
         BtnMainMenu = new javax.swing.JButton();
+        ProfileNameText = new javax.swing.JLabel();
+        ProfileUIDText = new javax.swing.JLabel();
+        Profileemailtext = new javax.swing.JLabel();
+        ProfileNoText = new javax.swing.JLabel();
+        ProfileNoDB = new javax.swing.JLabel();
+        ProfileemailDB = new javax.swing.JLabel();
+        ProfileUIDDB = new javax.swing.JLabel();
+        ProfileNameDB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,28 +56,79 @@ public class MyProfile extends javax.swing.JFrame {
             }
         });
 
+        ProfileNameText.setText("Name");
+
+        ProfileUIDText.setText("User ID");
+
+        Profileemailtext.setText("E-Mail");
+
+        ProfileNoText.setText("Phone Number");
+        ProfileNoText.setToolTipText("");
+
+        ProfileNoDB.setText("Phone Number");
+
+        ProfileemailDB.setText("E-Mail");
+        ProfileemailDB.setMinimumSize(new java.awt.Dimension(70, 14));
+
+        ProfileUIDDB.setText("User ID");
+        ProfileUIDDB.setMinimumSize(new java.awt.Dimension(70, 14));
+
+        ProfileNameDB.setText("Name");
+        ProfileNameDB.setMinimumSize(new java.awt.Dimension(70, 14));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(BtnMainMenu)
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnMainMenu)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(ProfileNameText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Profileemailtext, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ProfileUIDText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ProfileNoText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(ProfileNameDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ProfileemailDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ProfileUIDDB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ProfileNoDB, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(BtnMainMenu)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ProfileNameText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ProfileUIDText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Profileemailtext)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ProfileNoText))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ProfileNameDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ProfileUIDDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ProfileemailDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ProfileNoDB)))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMainMenuActionPerformed
-        MainMenu m = new MainMenu(null);
+        MainMenu m = new MainMenu(user);
         m.setVisible(true);
         this.setVisible(false);
         this.dispose();
@@ -105,9 +167,26 @@ public class MyProfile extends javax.swing.JFrame {
                 new MyProfile().setVisible(true);
             }
         });
+        Database D = new Database();
+        
+        
+                Statement state1 = D.con().createStatement();
+                Statement state2 = D.con().createStatement();
+                Statement state3 = D.con().createStatement();
+                Statement state4 = D.con().createStatement();    
+    
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnMainMenu;
+    private javax.swing.JLabel ProfileNameDB;
+    private javax.swing.JLabel ProfileNameText;
+    private javax.swing.JLabel ProfileNoDB;
+    private javax.swing.JLabel ProfileNoText;
+    private javax.swing.JLabel ProfileUIDDB;
+    private javax.swing.JLabel ProfileUIDText;
+    private javax.swing.JLabel ProfileemailDB;
+    private javax.swing.JLabel Profileemailtext;
     // End of variables declaration//GEN-END:variables
 }
