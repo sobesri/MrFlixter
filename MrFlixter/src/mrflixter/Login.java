@@ -168,8 +168,8 @@ public class Login extends javax.swing.JFrame {
         String password = new String(TxtPassword.getPassword());
         try {
             db.con();
-            ResultSet rs = db.getdata("SELECT * FROM user WHERE user_name='" + username
-                    + "'&& password='" + password + "'");
+            ResultSet rs = db.getdata("SELECT * FROM user WHERE username='" + username
+                    + "'&& Password='" + password + "'");
 
             if (rs.next()) {
                 System.out.println("username- " + username);
